@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+Welcome #{userController.user.username}
+
+<style>
+#buy
+{
+	background-color:#8FF04E;
+}
+
+#payment
+{
+	color:red;	
+}
+</style>
+
+</h:head> 
+<body> 
+	<ui:insert name="header" >
+			<ui:include src="settings.xhtml" />
+		</ui:insert>
+
+<p>List of Shops</p>
+
+<h:form id="shop">
+	<h:dataTable var="shop" value="#{shopBean.allShopRecords}" border="1" class="ui-datatable">
+	<f:facet name="caption">Shops</f:facet>
+		<h:column>
+		<f:facet name="header">Id</f:facet>
+		<h:outputText id="id_shop" value="#{shop.idShop}"></h:outputText>
+		</h:column>
+		<h:column>
+	<f:facet name="header">Country</f:facet>
+	<h:outputText id="country_shop" value="#{countryBean.selectCountryById(shop.idCountry)}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Description</f:facet>
+		<h:outputText id="description_shop" value="#{shop.descriptionShop}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Quantity</f:facet>
+		<h:outputText id="quantity_shop" value="#{shop.quantity}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Price</f:facet>
+		<h:outputText id="price_shop" value="#{shop.price}"></h:outputText>
+		</h:column>
+		<h:column>
+	<f:facet name="header">Sector</f:facet>
+	<h:outputText id="sector_shop" value="#{sectorBean.selectSectorById(shop.idSector)}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Validity</f:facet>
+		<h:outputText id="validity_shop" value="#{shop.validityShop}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Buy</f:facet>
+		<h:commandLink id="buy" value="Buy" actionListener="#{shopBean.buy()}">
+		</h:commandLink>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Payment</f:facet>
+		<h:outputText id="payment" value="#{shopBean.buy()}"></h:outputText>
+		</h:column>
+		</h:dataTable>
+		</h:form>
+		
+		
+		
+List of Brands
+
+<h:form id="brand">
+	<h:dataTable var="brand" value="#{brandBean.allBrandRecords()}" border="1" class="ui-datatable">
+	<f:facet name="caption">Brands</f:facet>
+		<h:column>
+		<f:facet name="header">Id</f:facet>
+		<h:outputText id="id_brand" value="#{brand.idBrand}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Name</f:facet>
+		<h:outputText id="name_brand" value="#{brand.nameOfBrand}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Description</f:facet>
+		<h:outputText id="description_brand" value="#{brand.descriptionBrand}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Validity</f:facet>
+		<h:outputText id="validity_brand" value="#{brand.validityBrand}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Shop</f:facet>
+		<h:outputText id="shop_brand" value="#{brand.idShop}"></h:outputText>
+		</h:column>
+		</h:dataTable>
+		</h:form>
+		
+		<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+
+</body> 
+</html>

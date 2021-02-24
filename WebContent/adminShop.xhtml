@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head>
+<h:title>Admin of Shop</h:title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	
+
+<style>
+.ui-datatable table {
+	border-collapse: collapse;
+	width: 50%;
+}
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+	text-align: center;
+	padding: 4px 10px;
+}
+.ui-datatable .ui-datatable-header {
+	border-bottom: 0px none;
+}
+.ui-datatable .ui-datatable-footer {
+	border-top: 0px none;
+}
+.ui-datatable thead th, .ui-datatable tfoot td {
+	text-align: center;
+}
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+	padding: 4px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-datatable tbody td {
+	border-color: inherit;
+}
+.ui-datatable .ui-sortable-column {
+	cursor: pointer;
+}
+.ui-datatable .ui-column-filter {
+	display: block;
+	width: 100px;
+	margin: auto;
+}
+.ui-datatable-scrollable table {
+	table-layout: fixed;
+}
+.ui-datatable-scrollable-body {
+	overflow: auto;
+}
+.ui-datatable-scrollable-header, .ui-datatable-scrollable-footer {
+	overflow: hidden;
+	border: 0px none;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header,
+	.ui-datatable-scrollable .ui-datatable-scrollable-footer {
+	position: relative;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header td {
+	font-weight: normal;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 15px;
+	background-color: transparent;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 1px solid white;
+	background-color: rgba(194, 194, 194, .5);
+}
+.ui-datatable .ui-datatable-data tr.ui-state-hover {
+	border-color: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+}
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+	padding: 2px;
+}
+.ui-datatable .ui-row-editor .ui-icon-check, .ui-datatable .ui-row-editor .ui-icon-close
+	{
+	display: none;
+}
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-check,
+	.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-close {
+	display: inline-block;
+}
+.ui-datatable .ui-datatable-data tr.ui-row-editing td.ui-editable-column,
+	.ui-datatable .ui-datatable-data td.ui-cell-editing {
+	padding: 0;
+	margin: 0;
+}
+.ui-datatable-rtl {
+	direction: rtl;
+}
+.ui-datatable-rtl.ui-datatable thead th, .ui-datatable-rtl.ui-datatable tfoot td
+	{
+	text-align: right;
+}
+</style>
+</h:head> 
+<h:body> 
+
+<p>Add Shop</p>
+	<form id="addShop">
+
+		<h:panelGrid columns="2">
+            <div class="form-group">
+                <h:outputLabel value="Id:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{shopBean.shop.idShop}" styleClass="form-control" required="true" id="id"/>
+                </div>
+            </div>
+            
+             <div class="form-group">
+                    <label for="inputCountry" class="col-sm-2 control-label">Country </label>
+
+                    <div class="input-group col-sm-6">
+                        <h:selectOneMenu class="form-control" id="inputCountry" var="c" value="#{countryBean.allCountryRecords()}">
+                            <f:selectItems itemLabel="#{c.country}" itemValue="#{c.idCountry}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <h:message for="inputCountry" styleClass="col-sm-4 text-danger"/>
+                </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Quantity:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText type="num" value="#{shopBean.shop.quantity}" styleClass="form-control" required="true" id="quantity"/>
+                </div>
+            </div>
+            
+             <div class="form-group">
+                <h:outputLabel value="Price:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText type="num" value="#{shopBean.shop.price}" styleClass="form-control" required="true" id="price"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Description:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputTextarea value="#{shopBean.shop.descriptionShop}" styleClass="form-control" required="true" id="description"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Validity:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:selectOneRadio value="#{shopBean.shop.validityShop}" required="true" id="validation">
+                    <f:selectItem itemLabel=" Valid " itemValue="1"/>  
+                    <f:selectItem itemLabel=" Invalid " itemValue="0"/>
+                    </h:selectOneRadio>
+                </div>
+            </div>
+           
+            <div class="form-group">
+                    <label for="inputSector" class="col-sm-2 control-label">Sector </label>
+
+                    <div class="input-group col-sm-6">
+                        <h:selectOneMenu class="form-control" id="inputSector" var="sect" value="#{sectorBean.allSectorRecords}">
+                            <f:selectItems itemLabel="#{sect.nameOfSector}" itemValue="#{sect.idSector}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <h:message for="inputSector" styleClass="col-sm-4 text-danger"/>
+                </div>
+            
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Save" action="#{shopBean.saveShopRecord()}" styleClass="btn btn-primary btn-sm btnPos" />
+                </div>
+            </div>
+        </h:panelGrid>
+        <h:outputText id="saveResult" rendered="#{not empty idShop}" value="!! Shop Record Saved In Database !!" styleClass="successText" />
+</form>
+
+List of Shops
+
+<h:form id="shop">
+	<h:dataTable var="shop" value="#{shopBean.allShopRecords}" border="1" class="ui-datatable">
+	<f:facet name="caption">Shops</f:facet>
+		<h:column>
+		<f:facet name="header">Id</f:facet>
+		<h:outputText id="id_shop" value="#{shop.idShop}"></h:outputText>
+		</h:column>
+		<h:column>
+	<f:facet name="header">Country</f:facet>
+	<h:outputText id="country_shop" value="#{countryBean.selectCountryById(shop.idCountry)}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Description</f:facet>
+		<h:outputText id="description_shop" value="#{shop.descriptionShop}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Quantity</f:facet>
+		<h:outputText id="quantity_shop" value="#{shop.quantity}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Price</f:facet>
+		<h:outputText id="price_shop" value="#{shop.price}"></h:outputText>
+		</h:column>
+		<h:column>
+	<f:facet name="header">Sector</f:facet>
+	<h:outputText id="sector_shop" value="#{sectorBean.selectSectorById(shop.idSector)}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Validity</f:facet>
+		<h:outputText id="validity_shop" value="#{shop.validityShop}"></h:outputText>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Edit</f:facet>
+		<h:commandLink value="Edit" actionListener="#{shopBean.updateShopDetails()}">
+		</h:commandLink>
+		</h:column>
+		<h:column>
+		<f:facet name="header">Delete</f:facet>
+		<h:commandLink value="Delete" actionListener="#{shopBean.deleteShopRecord()}" onclick="return confirm ('Are you sure?')">
+		</h:commandLink>
+		</h:column>
+		</h:dataTable>
+		</h:form>
+
+<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+</h:body> 
+</html>

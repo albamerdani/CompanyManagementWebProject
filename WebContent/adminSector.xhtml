@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head>
+<h:title>Admin of Sector</h:title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+	
+
+<style>
+.ui-datatable table {
+	border-collapse: collapse;
+	width: 50%;
+}
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+	text-align: center;
+	padding: 4px 10px;
+}
+.ui-datatable .ui-datatable-header {
+	border-bottom: 0px none;
+}
+.ui-datatable .ui-datatable-footer {
+	border-top: 0px none;
+}
+.ui-datatable thead th, .ui-datatable tfoot td {
+	text-align: center;
+}
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+	padding: 4px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-datatable tbody td {
+	border-color: inherit;
+}
+.ui-datatable .ui-sortable-column {
+	cursor: pointer;
+}
+.ui-datatable .ui-column-filter {
+	display: block;
+	width: 100px;
+	margin: auto;
+}
+.ui-datatable-scrollable table {
+	table-layout: fixed;
+}
+.ui-datatable-scrollable-body {
+	overflow: auto;
+}
+.ui-datatable-scrollable-header, .ui-datatable-scrollable-footer {
+	overflow: hidden;
+	border: 0px none;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header,
+	.ui-datatable-scrollable .ui-datatable-scrollable-footer {
+	position: relative;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header td {
+	font-weight: normal;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 15px;
+	background-color: transparent;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 1px solid white;
+	background-color: rgba(194, 194, 194, .5);
+}
+.ui-datatable .ui-datatable-data tr.ui-state-hover {
+	border-color: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+}
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+	padding: 2px;
+}
+.ui-datatable .ui-row-editor .ui-icon-check, .ui-datatable .ui-row-editor .ui-icon-close
+	{
+	display: none;
+}
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-check,
+	.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-close {
+	display: inline-block;
+}
+.ui-datatable .ui-datatable-data tr.ui-row-editing td.ui-editable-column,
+	.ui-datatable .ui-datatable-data td.ui-cell-editing {
+	padding: 0;
+	margin: 0;
+}
+.ui-datatable-rtl {
+	direction: rtl;
+}
+.ui-datatable-rtl.ui-datatable thead th, .ui-datatable-rtl.ui-datatable tfoot td
+	{
+	text-align: right;
+}
+</style>
+</h:head> 
+<h:body> 
+
+<p>Add Sector</p>
+
+	<form id="addSector">
+
+		<h:panelGrid columns="2">
+            <div class="form-group">
+                <h:outputLabel value="Id:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{sectorBean.sector.idSector}" styleClass="form-control" required="true" id="id"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Name:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{sectorBean.sector.nameOfSector}" styleClass="form-control" required="true" id="name"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Description:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputTextarea value="#{sectorBean.sector.descriptionSector}" styleClass="form-control" required="true" id="description"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Validity:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:selectOneRadio value="#{sectorBean.sector.validitySector}" required="true" id="validation">
+                    <f:selectItem itemLabel="Valid" itemValue="1"/>
+                    <f:selectItem itemLabel="Invalid" itemValue="0"/>
+                    </h:selectOneRadio>
+                </div>
+            </div>
+           
+            <div class="form-group">
+                    <label for="inputDep" class="col-sm-2 control-label">Department </label>
+
+                    <div class="input-group col-sm-6">
+                        <h:selectOneMenu class="form-control" id="inputDep" var="dep" value="#{depBean.allDepRecords()}">
+                            <f:selectItems itemLabel="#{dep.nameOfDep}" itemValue="#{dep.idDep}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <h:message for="inputDep" styleClass="col-sm-4 text-danger"/>
+                </div>
+            
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Save" action="#{sectorBean.saveSectorRecord()}" styleClass="btn btn-primary btn-sm btnPos" />
+                </div>
+            </div>
+        </h:panelGrid>
+        <h:outputText id="saveResult" rendered="#{not empty idSector}" value="!! Sector Record Saved In Database !!" styleClass="successText" />
+</form>
+
+
+List of Sectors
+
+<h:form id="sectors">
+	<h:dataTable var="sector" value="#{sectorBean.allSectorRecords}" border="1" class = "table table-striped table-hover table-bordered tableUpdated">
+	<f:facet name="caption">Companies</f:facet>
+		<h:column>
+		<f:facet name="header">Id</f:facet>
+		<h:outputText id="id_sector" value="#{sector.idSector}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Name</f:facet>
+			<h:outputText id="name_sector" value="#{sector.nameOfSector}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>
+			<h:outputText id="description_sector" value="#{sector.descriptionSector}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Validity</f:facet>
+			<h:outputText id="val_sector" value="#{sector.validitySector}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Department</f:facet>
+			<h:outputText id="dep_sector" value="#{depBean.selectDepById(sector.idDep)}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Edit</f:facet>
+			<h:commandLink value="Edit" action="#{sectorBean.updateSectorDetails()}">
+		</h:commandLink>
+		<h:commandButton value="Edit" type="button" 
+		onclick="editModal('#{sectorBean.sector.idSector}','#{sectorBean.sector.nameOfSector}','#{sectorBean.sector.descriptionSector}', '#{sectorBean.sector.validitySector}')"
+		class="btn btn-primary fa fa-edit" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Delete</f:facet>
+			<h:commandLink value="Delete" action="#{sectorBean.deleteSectorRecord()}" onclick="return confirm ('Are you sure?')">
+			</h:commandLink>
+		
+			<h:form id="formPass">
+				<!-- <h:growl id="messages" showDetail="true" /> -->
+					<h:commandButton value="Delete" style="color:red"	class="btn btn-danger "
+						actionListener="#{sectorBean.deleteSectorRecord()}" update="messages" ajax="true">
+					<!--<h:confirm header="Confirm" message="Are you sure ?" icon="ui-icon-alert" /> -->
+					</h:commandButton>
+					<!--<h:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<h:commandButton actionListener="#{sectorBean.page}" value="Yes" type="button" 
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<h:commandButton actionListener="#{sectorBean.page}"
+						value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</h:confirmDialog> -->
+				<h:outputText id="idPass"></h:outputText>
+			</h:form>
+		</h:column>
+		
+		</h:dataTable>
+		</h:form>
+	
+	<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+</h:body> 
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head></h:head> 
+<body> 
+
+		
+		<h:spacer height="20" />
+		
+		<h:form>
+		
+			<h:commandLink id="changePassword"  >
+				<h:outputText value="1.Change your password" />
+			</h:commandLink>
+			
+			<h:overlayPanel id="moviePanel" for="changePassword" hideEffect="fade" dynamic="true">
+			
+			<!-- Password change -->
+			
+				<h:messages id="messages" showDetail="true" autoUpdate="true" />  
+				<h:panelGrid columns="1" id="matchGrid" cellpadding="5">
+				
+					<h:outputLabel for="oldPwd" value="Old Password: *" /> 
+					<h:password id="oldPwd" value="#{userController.password}"  label="Password" required="true"  /> 
+					<h:separator />
+					
+					<h:outputLabel for="pwd1" value="New password: *" />
+					<h:password id="pwd1" value="#{userController.newPassword}" match="pwd2" label="Password 1" required="true" feedback="true" />
+					<h:separator />
+					
+					<h:outputLabel for="pwd2" value="Confirm new password *" />
+					<h:password id="pwd2" value="#{userController.newPassword}" label="Password 2" required="true" />
+					
+				</h:panelGrid>
+				
+				<h:commandButton update="matchGrid messages @form" value="Save" action="#{userController.changePassword}"/>
+				
+			</h:overlayPanel>
+			<h:spacer height="100" />
+			<h:separator />
+			
+			
+			<h:commandLink id="deactivateAccount"  >
+				<h:outputText value="1.Deactivate your account" />
+			</h:commandLink>
+			
+			<h:overlayPanel id="moviePanel1" for="deactivateAccount" hideEffect="fade" dynamic="true">
+			
+			<h:messages id="messages1" showDetail="true" autoUpdate="true" /> 
+			
+			<!-- Deactivate account-->
+				
+				<h:panelGrid columns="1" id="matchGrid1" cellpadding="5">
+					
+					<h:outputLabel for="password" value="Confirm your password *" />
+					<h:password id="password" value="#{loginController.user.password}" label="Password" required="true" />
+					
+				</h:panelGrid>
+				
+				<h:commandButton update="matchGrid1 messages1 @form" value="Deactivate" action="#{loginController.deactivateAccount}"/>
+				
+			</h:overlayPanel>
+			
+		</h:form>
+		
+		<h:spacer height="300" />
+		
+		<ui:insert name="footer" >
+			<ui:include src="/footer.xhtml" />
+		</ui:insert>
+			
+
+</body> 
+</html>

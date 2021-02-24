@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j">
+
+	<h:head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	</h:head>
+	
+	<h:body>
+	
+	User Registration
+	<br />
+				<form id="registerUser">
+
+					<h:panelGrid columns="2">
+            
+            <div class="form-group">
+                <label for="firstname" class="control-label">Name</label>
+                <div class="col-xs-10">
+                    <h:inputText value="#{userController.user.firstName}" styleClass="form-control" required="true" id="firstname"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastname" class="control-label">Surname</label>
+                <div class="col-xs-10">
+                    <h:inputText value="#{userController.user.lastName}" styleClass="form-control" required="true" id="lastname"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender" class="control-label">Gender</label>
+                <div class="col-xs-10">
+                    <h:selectOneRadio value="#{userController.user.gender}" required="true" id="gender">
+                    <f:selectItem itemLabel="Female" itemValue="Female"/>
+                    <f:selectItem itemLabel="Male" itemValue="Male"/>
+                    </h:selectOneRadio>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <div class="col-xs-10">
+                    <h:inputText  id="email" value="#{userController.user.email}" styleClass="form-control" required="true"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phoneNumber" class="control-label">Cel</label>
+                <div class="col-xs-10">
+                    <h:inputText id="phoneNumber" value="#{userController.user.cel}" styleClass="form-control" required="true"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address" class="control-label">Address</label>
+                <div class="col-xs-10">
+                    <h:inputText id="address" value="#{userController.user.addressUser}" styleClass="form-control" required="true"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="username" class="control-label">Username</label>
+                <div class="col-xs-10">
+                    <h:inputText id="username" value="#{userController.user.username}" styleClass="form-control" required="true"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="control-label">Password</label>
+                <div class="col-xs-10">
+                <h:inputSecret styleClass="form-control" id="password" value="#{userController.user.password}" required="true"/>
+                </div>
+            </div>
+            
+             <div class="form-group">
+           		<label for="password2" class="control-label">Verify password</label>
+                <h:inputSecret styleClass="form-control" id="password2" value="#{userController.user.password}" required="true"/>
+			</div>			 
+            
+            <div class="form-group">
+                    <label for="inputRole" class="control-label">Role</label>
+
+                    <div class="input-group col-sm-6">
+                        <h:selectOneMenu class="form-control" id="inputRole" var="r" value="#{roleBean.allRoleRecords()}">
+                            <f:selectItems itemLabel="#{r.role}" itemValue="#{r.idRole}"/>
+                        </h:selectOneMenu>
+                	</div>
+              </div>
+            
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Register" action="#{userController.saveUserRecord()}" styleClass="btn btn-primary btn-sm btnPos" />
+                </div>
+            </div>
+        </h:panelGrid>
+        <h:outputText id="saveResult" rendered="#{not empty idUser}" value="!! User Record Saved In Database !!" styleClass="successText" />
+</form>
+
+<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+        
+	</h:body>
+</html>

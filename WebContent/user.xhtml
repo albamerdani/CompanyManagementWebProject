@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</h:head> 
+<body> 
+<h:form>
+		<!--Listimi i userave dhe kryerja e delete nga administratori-->
+		
+	
+					<h:dataTable id="userTable" var="user" value="#{userController.allUserRecords()}" border="1" class = "table table-striped table-hover table-bordered tableUpdated">
+					<div>
+						<h:column headerText="Id">
+						<f:facet name="header">Id</f:facet>
+							<h:outputText value="#{user.idUser}"/>
+						</h:column>
+					</div>
+					
+					<div>
+						<h:column headerText="Name">
+						<f:facet name="header">Firstname</f:facet>
+							<h:outputText value="#{user.firstName}"/>
+						</h:column>
+					</div>
+					
+					<div>
+						<h:column headerText="Lastname">
+						<f:facet name="header">Lastname</f:facet>
+							<h:outputText value="#{user.lastName}"/>
+						</h:column> 
+					</div>
+					
+					<div>
+						<h:column headerText="Gender">
+						<f:facet name="header">Gender</f:facet>
+							<h:outputText value="#{user.gender}"/>
+						</h:column> 
+					</div>
+					
+					<div>
+						<h:column headerText="Email">
+						<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{user.email}"/>
+						</h:column> 
+					</div>
+					
+					<div>
+						<h:column headerText="Cel">
+						<f:facet name="header">Cel</f:facet>
+							<h:outputText value="#{user.cel}"/>
+						</h:column> 
+					</div>
+					
+					<div>
+						<h:column headerText="Address">
+						<f:facet name="header">Address</f:facet>
+							<h:outputText value="#{user.addressUser}"/>
+						</h:column>
+					</div>
+					
+					<div>
+						<h:column headerText="Delete" >
+						<f:facet name="header">Delete</f:facet>
+							<h:commandLink value= "Delete" ajax="false" process="@this" action="#{userController.deleteUserRecord()}" style="color:#cd0a0a;; text-shadow: 2px 2px 2px gray; font-size:25px">
+								<!-- <h:confirm message="Are you sure you want to delete it? " header="Confirmation" icon="ui-icon-alert" />-->
+							</h:commandLink>
+							<!-- <h:confirmDialog global="true" showEffect="fade" hidEffect="fade"  update="@form">
+								<h:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<h:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</h:confirmDialog>-->
+						</h:column>     
+					</div>
+					</h:dataTable>
+		
+			
+		</h:form>
+		
+		<ui:insert name="footer" >
+			<ui:include src="/footer.xhtml" />
+		</ui:insert>
+		
+</body> 
+</html>

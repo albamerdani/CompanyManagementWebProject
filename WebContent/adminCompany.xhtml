@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head>
+	<h:title>Admin of Company</h:title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	
+
+<style>
+.ui-datatable table {
+	border-collapse: collapse;
+	width: 50%;
+}
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+	text-align: center;
+	padding: 4px 10px;
+}
+.ui-datatable .ui-datatable-header {
+	border-bottom: 0px none;
+}
+.ui-datatable .ui-datatable-footer {
+	border-top: 0px none;
+}
+.ui-datatable thead th, .ui-datatable tfoot td {
+	text-align: center;
+}
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+	padding: 4px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-datatable tbody td {
+	border-color: inherit;
+}
+.ui-datatable .ui-sortable-column {
+	cursor: pointer;
+}
+.ui-datatable .ui-column-filter {
+	display: block;
+	width: 100px;
+	margin: auto;
+}
+.ui-datatable-scrollable table {
+	table-layout: fixed;
+}
+.ui-datatable-scrollable-body {
+	overflow: auto;
+}
+.ui-datatable-scrollable-header, .ui-datatable-scrollable-footer {
+	overflow: hidden;
+	border: 0px none;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header,
+	.ui-datatable-scrollable .ui-datatable-scrollable-footer {
+	position: relative;
+}
+.ui-datatable-scrollable .ui-datatable-scrollable-header td {
+	font-weight: normal;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 15px;
+	background-color: transparent;
+}
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 1px solid white;
+	background-color: rgba(194, 194, 194, .5);
+}
+.ui-datatable .ui-datatable-data tr.ui-state-hover {
+	border-color: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+}
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+	padding: 2px;
+}
+.ui-datatable .ui-row-editor .ui-icon-check, .ui-datatable .ui-row-editor .ui-icon-close
+	{
+	display: none;
+}
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-check,
+	.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-close {
+	display: inline-block;
+}
+.ui-datatable .ui-datatable-data tr.ui-row-editing td.ui-editable-column,
+	.ui-datatable .ui-datatable-data td.ui-cell-editing {
+	padding: 0;
+	margin: 0;
+}
+.ui-datatable-rtl {
+	direction: rtl;
+}
+.ui-datatable-rtl.ui-datatable thead th, .ui-datatable-rtl.ui-datatable tfoot td
+	{
+	text-align: right;
+}
+</style>
+	
+</h:head> 
+<h:body>
+
+<br />
+
+Add Company
+	<form id="addCompany" method="post">
+
+		<h:panelGrid columns="2">
+            <div class="form-group">
+                <h:outputLabel value="Id:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{companyBean.company.idCompany}" styleClass="form-control" required="true" id="id"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Name:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{companyBean.company.nameOfCompany}" styleClass="form-control" required="true" id="name"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="NIPT:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{companyBean.company.nipt}" styleClass="form-control" required="true" id="nipt"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Address:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputText value="#{companyBean.company.address}" styleClass="form-control" required="true" id="address"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Description:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:inputTextarea value="#{companyBean.company.descriptionCompany}" row="5" col="200" styleClass="form-control" required="true" id="description"/>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h:outputLabel value="Validity:" styleClass="control-label" />
+                <div class="col-xs-10">
+                    <h:selectOneRadio value="#{companyBean.company.validityCompany}" required="true" id="validation">
+                    <f:selectItem itemLabel="Valid" itemValue="1"/>
+                    <f:selectItem itemLabel="Invalid" itemValue="0"/>
+                    </h:selectOneRadio>
+                </div>
+            </div>
+       
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <h:commandButton value="Save" action="#{companyBean.saveCompanyRecord}" process="@form" styleClass="btn btn-primary btn-sm btnPos" />
+                </div>
+            </div>
+        </h:panelGrid>
+        <h:outputText id="saveResult" rendered="#{not empty idCompany}" value="!! Company Record Saved In Database !!" class="successText" />
+</form>
+
+
+List of Companies
+
+<h:form id="company">
+	<h:dataTable var="comp" value="#{companyBean.allCompanyRecords()}" border="1" class = "table table-striped table-hover table-bordered tableUpdated">
+	<f:facet name="caption">Companies</f:facet>
+		<h:column>
+		<f:facet name="header">Id</f:facet>
+		<h:outputText id="id_comp" value="#{comp.idCompany}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Name</f:facet>
+			<h:outputText id="name_comp" value="#{comp.nameOfCompany}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nipt</f:facet>
+			<h:outputText id="nipt_comp" value="#{comp.nipt}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Address</f:facet>
+			<h:outputText id="address_comp" value="#{comp.address}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>
+			<h:outputText id="description_comp" value="#{comp.descriptionCompany}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Validity</f:facet>
+			<h:outputText id="validity" value="#{comp.validityCompany}"></h:outputText>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Edit</f:facet>
+			<h:commandLink value="Edit" action="#{countryBean.updateCountryDetails()}">
+		</h:commandLink>
+		<!-- <h:commandButton value="Edit" type="button" 
+		onclick="editModal('#{countryBean.country.idCountry}','#{countryBean.country.country}','#{countryBean.country.currency}')"
+		class="btn btn-primary fa fa-edit" />-->
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Delete</f:facet>
+			<h:commandLink value="Delete" action="#{countryBean.deleteCountryRecord()}" onclick="return confirm ('Are you sure?')" icon="ui-icon-alert">
+			</h:commandLink>
+		
+			<h:form id="formPass">
+					<h:commandButton value="Delete" style="color:red"	class="btn btn-danger "
+						actionListener="#{countryBean.deleteCountryRecord()}" update="messages" ajax="true">
+					</h:commandButton>
+					<!-- <h:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<h:commandButton actionListener="#{countryBean.reloadPage()}" value="Yes" type="button" 
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<h:commandButton actionListener="#{countryBean.reloadPage()}"
+						value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</h:confirmDialog>-->
+				<h:outputText id="idPass"></h:outputText>
+			</h:form>
+		</h:column>
+		
+		</h:dataTable>
+		</h:form>
+
+	<h:commandLink action="#{depBean.selectDepByComp(companyBean.company)}" value="Departs of Company" />
+	<h:link value="Departs" outcome="companyDeparts"></h:link>
+
+<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+</h:body> 
+</html>

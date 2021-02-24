@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+ "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/manage_company_webtehh</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <mapping class="model.entities.Company"/>
+        <mapping class="model.entities.Department"/>
+        <mapping class="model.entities.Sector"/>
+        <mapping class="model.entities.Shop"/>
+        <mapping class="model.entities.Country"/>
+        <mapping class="model.entities.Brand"/>
+        <mapping class="model.entities.User"/>
+        <mapping class="model.entities.Role"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head></h:head> 
+<body> 
+
+
+<!-- <ui:insert name="header" >
+			<ui:include src="header.xhtml" />
+		</ui:insert>-->
+		 
+		<h:form>
+		
+			<h:commandLink id="page" action="#{depBean.turnBack()}"> 
+				<h:outputText value="Turn Back"/>
+			</h:commandLink> 
+			
+			<br></br>
+			<br></br>
+			
+			<!-- Listimi i te gjithe sektoreve per departamentin e selektuar nga administratori -->
+			
+					<h:dataTable  id="sectorTable" var="sector" value="#{sectorBean.selectSectByDep(depBean.dep)}" >
+						
+						<h:column headerText="Name">
+							<h:outputText value="#{sector.nameOfSector}"/>
+						</h:column> 
+						
+						<h:column headerText="Description">
+							<h:outputText value="#{sector.descriptionSector}"/>
+						</h:column> 
+						
+						<h:column headerText="Action" >       	
+							<h:commandButton value="View" icon="ui-icon-extlink" action="#{sectorBean.selectSectByDep(depBean.dep)}" >
+							</h:commandButton>
+						</h:column>   
+					
+					</h:dataTable>
+	
+			
+		</h:form>
+		
+		<ui:insert name="footer" >
+			<ui:include src="/footer.xhtml" />
+		</ui:insert>
+
+
+</body> 
+</html>

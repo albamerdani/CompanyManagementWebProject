@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://richfaces.org/a4j"> 
+
+<h:head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</h:head> 
+<h:body> 
+
+<ui:insert name="header" >
+			<ui:include src="header.xhtml" />
+		</ui:insert>
+
+	<ul>
+	
+	<li><h:link value="Users" outcome="user"></h:link></li>
+	<li><h:link value="Roles" outcome="roles"></h:link></li>
+	<li><h:link value="Countries" outcome="countries"></h:link></li>
+	<li><h:link value="Companies" outcome="adminCompany"></h:link></li>
+	<li><h:link value="Departments" outcome="adminDepartment"></h:link></li>
+	<li><h:link value="Shops" outcome="adminShop"></h:link></li>
+	<li><h:link value="Brands" outcome="adminBrand"></h:link></li>
+
+	</ul>
+		
+		<ui:insert name="footer" >
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+</h:body> 
+</html>
